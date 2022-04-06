@@ -1,17 +1,7 @@
 
-//aula callback
-alert("Teste");
+//AULA 36 EACH
+var nomes = ["lucas","carlos"];
 
-function pegar_usuario(){
-    var u = {
-        'nome': 'João'
-    };
-    return u;
-}
-        
-function saudar_usuario(user) {
-    console.log('Olá ' + user.nome + ', como vai?');
-}
-        
-var user = pegar_usuario();
-saudar_usuario(user);
+$.each(nomes,function (indice,valor) {
+    console.log(valor);
+  });
