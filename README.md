@@ -1,3 +1,3 @@
 # Gitlucas
 
-Curso de javascript bem completo.
+Cursos diversos.
