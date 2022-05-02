@@ -1,36 +1,14 @@
-//AULA 40 efeitos
+//AULA 42 cadeia
 
 $(function () {
 
-    $("#botao-esconder").click(function () {
-        $(this).hide(2000, function () {
-            $("#texto-escondido").show();
-            alert("uhuuu");
-        });
+    $("#animar").click(function () {
+        $("#quadrado")
+        .animate({width: '+=20px'}, 500)
+        .animate({height:'+=20px'},500,
+        function(){
+            $("#quadrado").css('background-color','green')
+        })
+        .animate({borderRadius: '20px'});
     });
-
-    //original
-    $("#toggle-tab").click(function () {
-
-        $("#tab-content").toggle();
-        $("#toggle-tab").toggleClass("flip");
-
-    });
-
-    //mais lento
-/*     $("#toggle-tab").click(function() {
-
-        $("#tab-content").slideToggle(500);
-        $("#toggle-tab").toggleClass("flip");
-        
-    }); */
-
-    //fade
-/*     $("#toggle-tab").click(function() {
-
-        $("#tab-content").fadeToggle();
-        $("#toggle-tab").toggleClass("flip");
-
-    }); */
-
 });
