@@ -56,12 +56,12 @@ var camisetas = {
 // parâmetros da pesquisa
 
 var parametros_pesquisa = {
-    "quantidade": 10,
+    "quantidade": 1,
     "cor": "colorida",
     "gola": "gola_v",
     "qualidade": "q150",
     "estampa": "com_estampa",
-    "embalagem": "bulk"
+    "embalagem": "unitaria"
 }
 
 
@@ -84,8 +84,83 @@ var parametros_pesquisa = {
 
 $(function(){
 
+    function atualizar (parametros) { 
+
+
+        $(".refresh-loader").show();
+
+
+        var quantidade = parametros.quantidade;
+        var preco_unit = camisetas[parametros.cor][parametros.gola][parametros.estampa].preco_unit;
+        var foto = "img/" + camisetas[parametros.cor][parametros.gola][parametros.estampa].foto;
+        var valortotal = quantidade + preco_unit;
+        if (parametros.qualidade == "q190"){
+            valortotal *= 1.12; //aumento 12%
+        }
+        if (parametros.embalagem == "unitaria"){
+            valortotal += (quantidade * 0.15);
+        }
+        if (quantidade >= 1000){
+            valortotal *= 0.85;
+        }else if(quantidade >= 500){
+            valortotal *= 0.90;
+        }else if(quantidade >= 100){
+            valortotal *= 0.95;
+        }
+
+        window.setTimeout(function () {  
+
+            var id_gola = "#" + parametros.gola;
+            $("#result_gola").html($(id_gola).html());
+
+            var id_cor = "#" + parametros.cor;
+            $("#result_cor").html($(id_cor).html());
+
+            var id_estampa = "option[value='" + parametros.estampa +  "']";
+            $("#result_estampa").html($(id_estampa).html());
+
+            var id_qualidade = "#" + parametros.qualidade;
+            $("#result_qualidade").html($(id_qualidade).html());
+
+            var id_embalagem = "option[value='" + parametros.embalagem +  "']";
+            $("#result_embalagem").html($(id_embalagem).html());
+
+
+            $("#result_quantidade").html(parametros.quantidade);
+            $("#valor-total").html(valortotal.toLocaleString('pt-BR', {minimunFractionDigits: 2, maximunFractionDigits: 2}));
+            
+            $("#foto-produto").attr("src",foto);
+            $(".refresh-loader").hide();
+        }, 1000);
+
+        
+    };
+
+    //localstorage e atulizar parametros pesquisa
+
     // Se quiser uma sugestão dos passos a seguir para a resolução, veja mais abaixo.
-    
+    $("#quantidade").change(function () {
+        var parametro_input = $(this).attr('id');
+        parametros_pesquisa[parametro_input] = $(this).val();
+        atualizar(parametros_pesquisa);
+    });
+
+    $(".option-filter div").click(function () {  
+        $(this).parent().children("div").removeClass("selected");
+        $(this).addClass("selected");
+
+        var categoria = $(this).parent().attr('id');
+        parametros_pesquisa[categoria] = $(this).attr('id');
+        atualizar(parametros_pesquisa);
+        
+    });
+
+    $("select").change(function () {
+        var parametro_select = $(this).attr('id');
+        parametros_pesquisa[parametro_select] = $(this).val();
+        atualizar(parametros_pesquisa);
+    })
+    atualizar(parametros_pesquisa);
 });
 
 
