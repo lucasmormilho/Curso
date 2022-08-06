@@ -76,7 +76,7 @@ namespace Listas
 
             Console.WriteLine("------------------------------------------");
 
-            nomes2.Remove("Alex");
+            nomes2.Remove("Alex"); //string
             foreach (string obj in nomes2)
             {
                 Console.WriteLine(obj);
@@ -84,7 +84,7 @@ namespace Listas
 
             Console.WriteLine("------------------------------------------");
 
-            nomes2.RemoveAll(x => x[2] == 'b');
+            nomes2.RemoveAll(x => x[2] == 'b'); //lambda
             foreach (string obj in nomes2)
             {
                 Console.WriteLine(obj);
