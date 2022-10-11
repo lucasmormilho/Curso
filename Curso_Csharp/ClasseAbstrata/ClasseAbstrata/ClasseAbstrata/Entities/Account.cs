@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ClasseAbstrata.Entities
+{
+    abstract class Account
+    {
+        public int Number { get; private set; } //não pode alterar
+        public string Holder { get; private set; } //não pode alterar
+        public double Balance { get; protected set; } // pode alterar apenas na classe ou subclasse
+
+        public Account()
+        {
+
+        }
+
+        public Account(int number, string holder, double balance)
+        {
+            Number = number;
+            Holder = holder;
+            Balance = balance;
+        }
+
+        public virtual void Withdraw(double amount) //uso do virtual para liberação do uso de override na classe savingsaccoiunt
+        {
+            Balance -= amount + 5.0;
+        }
+
+        public void Deposit(double amount)
+        {
+            Balance += amount;
+        }
+    }
+}
