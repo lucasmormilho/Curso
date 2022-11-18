@@ -1,9 +1,9 @@
-﻿using System.Globalization;
+﻿using RentCarComInterface.Entities;
+using RentCarComInterface.Services;
 using System;
-using RentCarNoInterface.Entities;
-using RentCarNoInterface.Services;
+using System.Globalization;
 
-namespace RentCarNoInterface
+namespace RentCarComInterface
 {
     class Program
     {
@@ -15,22 +15,21 @@ namespace RentCarNoInterface
             Console.Write("Data de saida do carro:");
             DateTime inicio = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
             Console.Write("Data de retorno do carro:");
-            DateTime fim  = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+            DateTime fim = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
 
             Console.Write("Digite o preço por hora: ");
             double hora = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Console.Write("Digite o preço por dia: ");
             double dia = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
-            AluguelCarro aluguelCarro = new AluguelCarro(inicio, fim, new Veiculo(modelo)); //atento
+            AluguelCarro aluguel = new AluguelCarro(inicio, fim, new Veiculo(modelo)); //instancia do aluguel
 
-            ServicoAluguel servicoAluguel = new ServicoAluguel(hora,dia);
+            ServicoAluguel servico = new ServicoAluguel(hora, dia); //instancia do serviço
 
-            servicoAluguel.ProcessarNotaFiscal(aluguelCarro);
+            servico.ProcessarPagamento(aluguel);
 
-            Console.WriteLine("PAGAMENTO:");
-            Console.WriteLine(aluguelCarro.NotaFiscal);
-
+            Console.WriteLine("PAGAMENTO: ");
+            Console.WriteLine(aluguel.Fatura);
         }
     }
 }
