@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RentCarComInterface.Services
 {
-    class TaxaBrasil
+    class TaxaBrasil : IServicoTaxa //realização de interface
     {
-        public double Taxa(double pagamento)
+        public double Taxa(double pagamento) //precisa ter o mesmo nome da operação para funcionar a interface
         {
             if (pagamento <= 100)
             {

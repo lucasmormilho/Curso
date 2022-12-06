@@ -24,7 +24,7 @@ namespace RentCarComInterface
 
             AluguelCarro aluguel = new AluguelCarro(inicio, fim, new Veiculo(modelo)); //instancia do aluguel
 
-            ServicoAluguel servico = new ServicoAluguel(hora, dia); //instancia do serviço
+            ServicoAluguel servico = new ServicoAluguel(hora, dia, new TaxaArgentina()); //instancia da interface determinando o tipo de taxa (brasil, portugal, EUA, etc)
 
             servico.ProcessarPagamento(aluguel);
 
